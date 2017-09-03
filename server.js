@@ -11,6 +11,9 @@ var router = express.Router();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
+app.use(express.static(__dirname + '/frontend'));
+app.use(express.static(__dirname + 'node_modules'));
+
 
 router.use(function(req, res, next) {
     console.log('Something is happening.');
@@ -46,11 +49,17 @@ router.route('/datapoint')
 });
 
 router.get('/', function(req, res) {
-    res.json({ message: 'hooray! welcome to our api!' });
+    console.log("try get");
+    Datapoint.find(function(err,datapoints){
+    	if(err)
+	    res.send(err)
+	res.json(datapoints) 
+    });
+    //res.json({ message: 'hooray! welcome to our api!' });
 });
 
 app.use('/api', router);
 app.listen(port);
 console.log('Magic happens on port ' + port);
 var mongoose   = require('mongoose');
-mongoose.connect('mongodb://178.62.194.135/greenhouse2');
+mongoose.connect('mongodb://localhost/greenhouse2');
