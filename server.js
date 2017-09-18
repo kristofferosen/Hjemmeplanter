@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var port = process.env.PORT || 80; 
 var moment = require('moment');
-var datapoint = require('./models/datapoint');
+var Datapoint = require('./models/datapoint');
 var router = express.Router();          
 
 
@@ -23,10 +23,11 @@ router.use(function(req, res, next) {
 router.route('/datapoint')
     .post(function(req, res) {
 
-        var datapoint = new datapoint();
+        var datapoint = new Datapoint();
 
         datapoint.chipcode = req.body.chipcode;
         datapoint.soilMoisture = req.body.soilMoisture;
+	datapoint.soilTemperature = req.body.soilTemperature;
         datapoint.time = Date.now();
 
         console.log(datapoint)

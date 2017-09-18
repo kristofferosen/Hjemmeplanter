@@ -1,4 +1,4 @@
-var App = angular.module('App', ['ngRoute', 'ngMessages', 'ngSanitize', 'ngCookies','angular-jwt','ngResource','chart.js','angular-momentjs']);
+var App = angular.module('App', ['ngRoute', 'ngMessages', 'ngSanitize', 'ngCookies','angular-jwt','ngResource','chart.js']);
 
 App.config(function ($routeProvider) {
 
@@ -22,18 +22,23 @@ App.controller('dashController', function ($scope, $http) {
 
             $scope.node8969837moist = [];
             $scope.node8969837temp = [];
+	    $scope.node8969837labels = [];	    
 
             $scope.node1800741moist = [];
             $scope.node1800741temp = [];
+	    $scope.node1800741labels = [];
 
             $scope.node1796642moist = [];
             $scope.node1796642temp = [];
+	    $scope.node1796642labels = [];
 
             $scope.node14790735moist = [];
             $scope.node14790735temp = [];
+	    $scope.node14790735labels = [];
 
             $scope.node8969661moist = [];
             $scope.node8969661temp = [];
+	    $scope.node8969661labels = [];
 
             for(i = 0; i < out.data.length; i++){
 
@@ -41,6 +46,7 @@ App.controller('dashController', function ($scope, $http) {
 
                    $scope.node8969837moist.push(out.data[i].soilMoisture);
                    $scope.node8969837temp.push(out.data[i].soilTemperature);
+		   $scope.node8969837labels.push(out.data[i].time);
 
                 }
 
@@ -48,6 +54,7 @@ App.controller('dashController', function ($scope, $http) {
 
                    $scope.node1800741moist.push(out.data[i].soilMoisture);
                    $scope.node1800741temp.push(out.data[i].soilTemperature);
+		   $scope.node1800741labels.push(out.data[i].time)
 
                 }
 
@@ -55,6 +62,7 @@ App.controller('dashController', function ($scope, $http) {
 
                    $scope.node1796642moist.push(out.data[i].soilMoisture);
                    $scope.node1796642temp.push(out.data[i].soilTemperature);
+		   $scope.node1796642labels.push(out.data[i].time)
 
                 }
 
@@ -62,17 +70,16 @@ App.controller('dashController', function ($scope, $http) {
 
                    $scope.node14790735moist.push(out.data[i].soilMoisture);
                    $scope.node14790735temp.push(out.data[i].soilTemperature);
-
+		   $scope.node14790735labels.push(out.data[i].time)
                 }
 
                 if(out.data[i].chipcode == 8969661.000000){
 
                    $scope.node8969661moist.push(out.data[i].soilMoisture);
                    $scope.node8969661temp.push(out.data[i].soilTemperature);
+		   $scope.node8969661labels.push(out.data[i].time);
 
-                   date = new Date(out.data[i].time)
-                   if(i%10 == 0){$scope.b.push(date.toLocaleString())}
-                   else {$scope.b.push('')}
+                   
                 }
 
             }
